@@ -1,3 +1,12 @@
+/****************************************
+ *Copyright (c) 2019 LZ.All Right Reserved
+ *ProjectName:     PlantsVsZombies
+ *Author:          LZ(ErLinEryi)
+ *Date:            2019.06.13
+ *LastModifyTime:  2020.01.10 18:30
+ *Email:           2117610943@qq.com
+ ****************************************/
+
 #ifndef __MAIN_H__
 #define __MAIN_H__
 

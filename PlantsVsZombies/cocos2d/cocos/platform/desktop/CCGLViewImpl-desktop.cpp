@@ -349,6 +349,12 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
 
     setFrameSize(rect.size.width, rect.size.height);
 
+    if (!isFullscreen())
+    {
+        const auto size = getMonitorSize();
+        glfwSetWindowPos(_mainWindow, size.width / 2 - rect.getMidX() / 1.5f, size.height / 2 - rect.getMidY() / 1.5f);
+    }
+
     // check OpenGL version at first
     const GLubyte* glVersion = glGetString(GL_VERSION);
 

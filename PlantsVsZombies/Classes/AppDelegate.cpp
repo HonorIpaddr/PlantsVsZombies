@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "LoadingScene.h"
+#include "Scenes/LoadingScene/LoadingScene.h"
 
 #define USE_AUDIO_ENGINE 1
 #define USE_SIMPLE_AUDIO_ENGINE 0
@@ -66,9 +66,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("PalntsVsZombies_1.1.1.191207_alpha", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("PlantsVsZombies_1.1.1.200221_alpha", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
-        glview = GLViewImpl::create("PalntsVsZombies_1.1.1.191207_alpha");
+        glview = GLViewImpl::create("PlantsVsZombies_1.1.1.200221_alpha");
 #endif
         director->setOpenGLView(glview);
     }
@@ -81,9 +81,28 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
+
+    Size frameSize = glview->getFrameSize();
+    // if the frame's height is larger than the height of medium size.
+    if (frameSize.height > mediumResolutionSize.height)
+    {
+        director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
+    }
+    // if the frame's height is larger than the height of small size.
+    else if (frameSize.height > smallResolutionSize.height)
+    {
+        director->setContentScaleFactor(MIN(mediumResolutionSize.height / designResolutionSize.height, mediumResolutionSize.width / designResolutionSize.width));
+    }
+    // if the frame's height is smaller than the height of medium size.
+    else
+    {
+        director->setContentScaleFactor(MIN(smallResolutionSize.height / designResolutionSize.height, smallResolutionSize.width / designResolutionSize.width));
+    }
     
+    register_all_packages();
+
     // create a scene. it's an autorelease object
-	auto scene = LoadingScene::CreateLaodingScene();
+	auto scene = LoadingScene::createLaodingScene();
     // run
     director->runWithScene(scene);
 

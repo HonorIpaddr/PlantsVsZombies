@@ -3938,6 +3938,5 @@
     <None Include="..\3d\CCAnimationCurve.inl">
       <Filter>3d</Filter>
     </None>
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

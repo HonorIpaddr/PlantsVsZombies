@@ -1,8 +1,11 @@
 /****************************************
-ProjectName:     PlantsVsZombies
-Author:          ErLinEryi
-LastModifyTime:  2020.01.10 18:30
-****************************************/
+ *Copyright (c) 2019 LZ.All Right Reserved
+ *ProjectName:     PlantsVsZombies
+ *Author:          LZ(ErLinEryi)
+ *Date:            2019.06.13
+ *LastModifyTime:  2020.01.10 18:30
+ *Email:           2117610943@qq.com
+ ****************************************/
 
 #include "cocos2d.h"
 #include "AppDelegate.h"
