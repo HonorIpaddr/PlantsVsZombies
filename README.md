@@ -41,6 +41,6 @@
 ## Last（最后）
 **Author: LZ** <br>
 **QQ: 2117610943** <br>
-**Emal: 2117610943@qq.com** <br>
+**Email: 2117610943@qq.com** <br>
 **Programming capacity is limited, please understand**<br>
 [如果你想要下载可运行文件请点击此处](https://blog.csdn.net/qq_40630246/article/details/102643196)
