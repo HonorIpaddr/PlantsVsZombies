@@ -103,6 +103,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
 	auto scene = LoadingScene::createLaodingScene();
+
     // run
     director->runWithScene(scene);
 

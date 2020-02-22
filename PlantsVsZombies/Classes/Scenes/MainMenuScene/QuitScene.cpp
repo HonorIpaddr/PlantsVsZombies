@@ -67,6 +67,7 @@ void QuitMenu::createButtons(const std::string &Label, Vec2 &vec2,const int& ID)
 			switch (ID)
 			{
 			case 1:
+				caveTime(getSumRunTime());
 				Director::getInstance()->end();
 				break;
 			case 2:
@@ -75,4 +76,30 @@ void QuitMenu::createButtons(const std::string &Label, Vec2 &vec2,const int& ID)
 			}
 		}
 	});
+}
+
+void QuitMenu::caveTime(const int time)
+{
+	UserDefault::getInstance()->setIntegerForKey("SUMRUNTIME",time);
+}
+
+int QuitMenu::getSumRunTime()
+{
+	time_t tt;
+	struct tm* nowtime;
+	time(&tt);
+	nowtime = localtime(&tt);
+
+	auto beginday = UserDefault::getInstance()->getIntegerForKey("BEGINDAY");
+	auto beginhour = UserDefault::getInstance()->getIntegerForKey("BEGINHOUR");
+	auto beginmin = UserDefault::getInstance()->getIntegerForKey("BEGINMIN");
+	auto beginsec = UserDefault::getInstance()->getIntegerForKey("BEGINSEC");
+
+	int sumTime = 0;
+
+	sumTime = UserDefault::getInstance()->getIntegerForKey("SUMRUNTIME") +
+		(nowtime->tm_mday * 24 * 3600 + nowtime->tm_hour * 3600 + nowtime->tm_min * 60 + nowtime->tm_sec) -
+		(beginday * 24 * 3600 + beginhour * 3600 + beginmin * 60 + beginsec);
+
+	return sumTime;
 }

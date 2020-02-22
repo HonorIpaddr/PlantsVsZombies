@@ -37,15 +37,13 @@ Scene* LoadingScene::createLaodingScene()
 
 bool LoadingScene::init()
 {
-	if (!Scene::init())
-	{
-		return false;
-	}
+	if (!Scene::init())return false;
 	
-	this->calculateFileNumbers();  /* 计算文件总数 */
-	this->setSystem();             /* 设置系统参数 */
-	this->loadUserData();          /* 加载用户信息 */
-	this->showLoadingBackGround(); /* 展示加载界面 */
+	setRunFirstTime();       /* 获取第一次运行时间 */
+	calculateFileNumbers();  /* 计算文件总数 */
+	setSystem();             /* 设置系统参数 */
+	loadUserData();          /* 加载用户信息 */
+	showLoadingBackGround(); /* 展示加载界面 */
 	
 	return true;
 }
@@ -383,6 +381,26 @@ void LoadingScene::calculateFileNumbers()
 #endif
 }
 
+void LoadingScene::setRunFirstTime()
+{
+	time_t tt;
+	struct tm* nowtime;
+	time(&tt);
+	nowtime = localtime(&tt);
+
+	if (UserDefault::getInstance()->getStringForKey("FIRSTRUNTIME").size() == 0)
+	{
+		UserDefault::getInstance()->setStringForKey("FIRSTRUNTIME", to_string(nowtime->tm_year + 1900) + "年 " +
+			to_string(nowtime->tm_mon) + "月 " + to_string(nowtime->tm_mday) + "日 星期" + to_string(nowtime->tm_wday) + " " +
+			to_string(nowtime->tm_hour) + "时 " + to_string(nowtime->tm_min) + "分 " + to_string(nowtime->tm_sec) + "秒");
+	}
+
+	UserDefault::getInstance()->setIntegerForKey("BEGINDAY", nowtime->tm_mday);
+	UserDefault::getInstance()->setIntegerForKey("BEGINHOUR", nowtime->tm_hour);
+	UserDefault::getInstance()->setIntegerForKey("BEGINMIN", nowtime->tm_min);
+	UserDefault::getInstance()->setIntegerForKey("BEGINSEC", nowtime->tm_sec);
+}
+
 int LoadingScene::openResourcesPath(map<string, string>& Path, const std::string& xml, bool IsEncryption)
 {
 	tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
@@ -390,14 +408,12 @@ int LoadingScene::openResourcesPath(map<string, string>& Path, const std::string
 	if (IsEncryption)
 	{
 		std::string textpath = _files->getStringFromFile(xml);
-
-		char Encryption[200000] = { 0 }, Password[200000] = { 0 };
-		strcpy(Encryption, textpath.c_str());
-
-		OpenLevelData::getInstance()->decrypt(Encryption, Password);
+		char* passWords = (char*)malloc(sizeof(char) * textpath.size());
+		
+		OpenLevelData::getInstance()->decrypt(textpath, passWords);
 
 		/* 打开资源路径 */
-		doc->Parse(Password);
+		doc->Parse(passWords);
 	}
 	else
 	{
@@ -413,6 +429,7 @@ int LoadingScene::openResourcesPath(map<string, string>& Path, const std::string
 			Path.insert(pair<string, string>(at->Name(), at->Value()));
 		}
 	}
+	delete doc;
 	return Path.size();
 }
 

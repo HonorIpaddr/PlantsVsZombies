@@ -7,6 +7,8 @@
 
 #include "GameEasterEggs.h"
 
+#include "Scenes/MainMenuScene/QuitScene.h"
+
 GameEasterEggs::GameEasterEggs():
 	_eggstext(nullptr)
 ,   _global(Global::getInstance())
@@ -191,6 +193,11 @@ void GameEasterEggs::createEggText()
 {
 	_audioId = _global->changeBgMusic("ZombiesWinEggs", false);
 
+	auto sumTime = QuitMenu::getSumRunTime();
+	int hour = sumTime / 3600;
+	int min = (sumTime - hour * 3600) / 60;
+	int sec = sumTime - hour * 3600 - min * 60;
+
 	/* 文字彩蛋 */
 	string buff = { "      真棒！！！首先祝贺你通过了此测试版的所有关卡。感谢你能够花费时间来关注此游戏。\
 你们的关注是我开发游戏的最大动力。正是因为你们的关注，才使得我有足够的信念使我继续坚持下去，并把游戏做的更好。\n\
@@ -203,9 +210,11 @@ void GameEasterEggs::createEggText()
 如果可以做动画并且愿意帮助我的人可以私聊我（动画是用spine软件制作的骨骼动画）。今后的更新是不定时的，可能会很慢。本人qq：2117610943\n\n" };
 
 	auto Eggstext = Label::createWithTTF("", "resources/fonts/GameFont.ttf", 36);
-	Eggstext->setString(buff + "游戏过程中经历 " + std::to_string(_global->userInformation->getBreakThroughnumbers()) + 
+	Eggstext->setString(buff + "游戏过程中经历 " + std::to_string(_global->userInformation->getBreakThroughnumbers()) +
 		" 次闯关失败！\n游戏过程中使用 " + std::to_string(_global->userInformation->getUsePlantsNumbers()) +
-		" 株植物进行防御！\n游戏过程中共有 " + std::to_string(_global->userInformation->getKillZombiesNumbers()) + " 个僵尸牺牲了！");
+		" 株植物进行防御！\n游戏过程中共有 " + std::to_string(_global->userInformation->getKillZombiesNumbers()) + " 个僵尸牺牲了！\n" +
+		UserDefault::getInstance()->getStringForKey("FIRSTRUNTIME") + " 是你第一次运行此游戏的时间！\n" +
+		"到目前为止你已经游戏了 " + to_string(hour) + "小时 " + to_string(min) + "分钟 " + to_string(sec) + "秒！");
 	Eggstext->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2.0f, -430));
 	Eggstext->setColor(Color3B(0, 255, 255));
 	Eggstext->setMaxLineWidth(1700);
@@ -215,7 +224,7 @@ void GameEasterEggs::createEggText()
 		CallFunc::create([=]()
 			{
 				auto text = Label::createWithTTF("静静的享受音乐播放完毕", "resources/fonts/GameFont.ttf", 36);
-				text->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2.0f, 100));
+				text->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2.0f, 70));
 				text->setColor(Color3B::WHITE);
 				text->setName("Text");
 				this->addChild(text);
@@ -270,7 +279,7 @@ void GameEasterEggs::musicCallBack()
 			button->setTitleColor(Color3B(0, 255, 255));
 			button->setTitleFontSize(18);
 			button->setScale(2.0f);
-			button->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2, 100));
+			button->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2, 70));
 			this->addChild(button);
 			button->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 				{

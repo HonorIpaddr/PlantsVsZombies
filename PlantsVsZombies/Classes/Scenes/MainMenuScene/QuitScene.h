@@ -19,6 +19,7 @@ class QuitMenu :public Dialog
 public:
 	CREATE_FUNC(QuitMenu);
 	void addLayer(Node* node);
+	static int getSumRunTime();
 	
 CC_CONSTRUCTOR_ACCESS:
 	QuitMenu():_quitDialog(nullptr){}
@@ -28,11 +29,9 @@ protected:
 	virtual void deleteDialog() override;
 
 private:
-	/* 创建对话框 */
-	void createDiglog();
-
-	/* 创建按钮 */
-	void createButtons(const std::string& Label, Vec2& vec2, const int& ID);
+	void createDiglog();	/* 创建对话框 */
+	void createButtons(const std::string& Label, Vec2& vec2, const int& ID);/* 创建按钮 */
+	void caveTime(const int time);
 
 private:
 	Sprite* _quitDialog;    /* 对话框 */

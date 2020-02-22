@@ -30,24 +30,10 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual bool init() override; 
 
 private:
-	int _textNumbers;                               /* 文本数 */
-	int _loadFileNumbers;                           /* 文件加载数 */
-	int _allFileNumbers;                            /* 文件总数(图片，音乐，动画，文本) */
-	bool _flowerVisible[5] = { false };             /* 加载花朵是否可见 */
-	float _loadingPrecent;                          /* 加载进度 */
-	Sprite* _sprite[8];                             /* 精灵图片 */
-	MenuItemLabel* _label;                          /* 文字标签 */
-	LoadingBar* _loadingBar;                        /* 进度条 */
-	EventListenerTouchOneByOne* _listener;          /* 加载监听 */
-	Global* _global;                                /* 全局变量单例 */
-	Director* _director;                            /* 导演单例 */
-	FileUtils* _files;                              /* 文件单例 */
-
-private:
-
 	void update(float Time) override;                 /* 定时器 */
 	void setSystem();                                 /* 设置系统参数 */
 	void calculateFileNumbers();                      /* 计算文件总数 */
+	void setRunFirstTime();                           /* 获取第一次运行时间 */
 
 	void loadUserData();                              /* 加载用户数据 */
 	void loadingText();                               /* 加载文字 */
@@ -68,4 +54,18 @@ private:
 	void beginGameCallBack(Ref* pSender);             /* 开始游戏回调 */
 
 	int openResourcesPath(map<string, string>& Path, const std::string& xml, bool IsEncryption = false);  /* 打开资源路径 */
+
+private:
+	int _textNumbers;                               // 文本数
+	int _loadFileNumbers;                           // 文件加载数
+	int _allFileNumbers;                            // 文件总数(图片，音乐，动画，文本)
+	bool _flowerVisible[5] = { false };             // 加载花朵是否可见 
+	float _loadingPrecent;                          // 加载进度 
+	Sprite* _sprite[8];                             // 精灵图片 
+	MenuItemLabel* _label;                          // 文字标签 
+	LoadingBar* _loadingBar;                        // 进度条 
+	EventListenerTouchOneByOne* _listener;          // 加载监听 
+	Global* _global;                                // 全局变量单例
+	Director* _director;                            // 导演单例 
+	FileUtils* _files;                              // 文件单例 
 };
