@@ -61,6 +61,7 @@ private:
 	bool judgeMousePositionHavePlant();                                                 /* 判断鼠标点击方位是否有植物 */
 	void removePreviewPlant();                                                          /* 移除预览植物 */
 	void removeShovel();                                                                /* 移除铲子 */
+	void recoveryPlantsColor();                                                         /* 恢复植物颜色 */
 	void judgeLevelIsFinished();                                                        /* 判断关卡是否结束 */
   	void setGameEnd();                                                                  /* 设置游戏结束 */
 	

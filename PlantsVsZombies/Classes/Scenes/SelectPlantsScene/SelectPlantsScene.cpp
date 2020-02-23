@@ -16,7 +16,7 @@
 SelectPlantsScene::SelectPlantsScene() :
 	_controlLayer(Layer::create()),
 	_scrollLayer(Layer::create()),
-	_spriteLayer(new Layer()),
+	_spriteLayer(nullptr),
 	_spriteLayer_(nullptr),
 	_requirement(nullptr),
 	_scrollView(extension::ScrollView::create()),
@@ -115,6 +115,7 @@ void SelectPlantsScene::createSelectPlantsDialog()
 	_controlLayer->getChildByName("ControlLayer")->removeChildByName("username");
 
 	_spriteLayer_ = SPSSpriteLayer::create();
+	_spriteLayer = new Layer;
 	_spriteLayer_->addLayer(_spriteLayer);
 	_spriteLayer->setGlobalZOrder(1);
 	this->addChild(_spriteLayer);
@@ -194,7 +195,7 @@ void SelectPlantsScene::readyTextCallBack(Node* node, const std::string& name, c
 		_scrollLayer->getChildByName("_scrollLayer")->removeChildByName("previewBackgroundImage");
 
 		_global->userInformation->setUserSelectCrads(_spriteLayer_->seedBankButton);
-		_global->userInformation->setSunNumbers(10000); //设定初始阳光数 
+		_global->userInformation->setSunNumbers(100000); //设定初始阳光数 
 
 		Director::getInstance()->replaceScene(GameScene::createScene());
 		break;

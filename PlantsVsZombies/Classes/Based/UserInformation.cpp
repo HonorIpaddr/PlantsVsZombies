@@ -24,7 +24,7 @@ UserInformation::UserInformation():
 , _mainToWorld(false)
 , _background(nullptr)
 , _currentPlayLevels(1)
-, _currentPlayWorldTag(1)
+, _currentPlayWorldTag(0)
 , _showInformation(CheckBox::EventType::SELECTED)
 , _highFPS(CheckBox::EventType::SELECTED)
 , _fullScreen(CheckBox::EventType::UNSELECTED)
@@ -35,6 +35,7 @@ UserInformation::UserInformation():
     for (int i = 0; i < 5; ++i)
     {
         WorldData* worldData = new WorldData();
+
         _userSelectWorldData.push_back(worldData);
     }
 }

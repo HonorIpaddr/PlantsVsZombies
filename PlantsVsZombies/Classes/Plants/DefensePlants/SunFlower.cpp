@@ -44,7 +44,7 @@ SunFlower* SunFlower::create(Node* node)
 void SunFlower::createRandomSuns()
 {
 	/* »ñÈ¡Ì«Ñô²ã */
-	runAction(RepeatForever::create(Sequence::create(DelayTime::create(5),
+	_sunLayer->runAction(RepeatForever::create(Sequence::create(DelayTime::create(5),
 		CallFunc::create([this]()
 			{
 				auto sun = new Sun(_sunLayer);
@@ -110,7 +110,7 @@ void SunFlower::goodsRecovery()
 	linster->onTouchBegan = [this](Touch* t, Event* e)
 	{
 		Point p = t->getLocation();
-		for (auto& sun : SunsGroup)
+		for (auto sun : SunsGroup)
 		{
 			if ( sun->getSun()->getBoundingBox().containsPoint(p) && sun->getEnable())
 			{

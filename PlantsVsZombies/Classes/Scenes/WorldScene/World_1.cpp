@@ -568,7 +568,7 @@ void World_1::createButtonListener(ui::Button* button, const int& ID)
 				OpenLevelData::getInstance()->setLevelNumber(ID);
 				
 				_global->userInformation->setCurrentPlayLevels(ID);
-				_global->userInformation->setCurrentPlayWorldTag(1);
+				_global->userInformation->setCurrentPlayWorldTag(0);
 				_global->userInformation->setCurrentPlayWorldName(" - 现代世界 - ");
 
 				Director::getInstance()->replaceScene(TransitionFade::create(1.0f, SelectPlantsScene::createScene()));

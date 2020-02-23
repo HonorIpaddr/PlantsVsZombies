@@ -24,7 +24,7 @@ CabbagePult::CabbagePult(Node* node):
 	_plantImage = nullptr;
 
 	_healthPoint = 300;
-	_combatEffecttiveness = 40;
+	_combatEffecttiveness = 60; // !!!暂时没有使用 使用的是cabbage里面的_attack
 	_plantsType = PlantsType::CabbagePult;
 }
 

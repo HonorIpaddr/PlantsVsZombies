@@ -58,7 +58,7 @@ void OptionsMenu::createDialog()
 	this->createCheckBox(Vec2(300, 175), Vec2(140, 175), _global->userInformation->getGameText().find("拉伸显示")->second, OptionScene_CheckBox::拉伸显示, "options_checkbox0", "options_checkbox1");
 
 	/* 创建彩蛋 */
-	if (_global->userInformation->getIsShowEggs())
+	if (_global->userInformation->getIsShowEggs() && UserDefault::getInstance()->getIntegerForKey(_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str()) >= 52)
 	{
 		auto button = Button::create(_global->userInformation->getImagePath().find("button")->second, _global->userInformation->getImagePath().find("button_down")->second);
 		button->setTitleLabel(label("制作者", 20, Vec2(0, 0), 0, Color3B::GRAY, 0.5f));
@@ -73,7 +73,7 @@ void OptionsMenu::createDialog()
 					AudioEngine::setVolume(AudioEngine::play2d(_global->userInformation->getMusicPath().find("gravebutton")->second), _global->userInformation->getSoundEffectVolume());
 					break;
 				case Widget::TouchEventType::ENDED:
-					Director::getInstance()->pushScene(TransitionFade::create(0.5f,GameEasterEggs::createScene()));
+					Director::getInstance()->pushScene(TransitionFade::create(0.5f, GameEasterEggs::createScene()));
 					break;
 				}
 			});

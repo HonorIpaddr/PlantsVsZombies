@@ -124,7 +124,7 @@ void CherryBomb::explodeHurtZombies()
 
 			if (!zombie->getZombieIsSurvive())
 			{
-				zombie->getZombieAnimation()->setVisible(false);
+				zombie->setZombieOpacity(0);
 				if (zombie->getZombieType() == ZombiesType::LmpZombies)
 				{
 					zombie->playZombiesDieAnimation("LmpZombies_Charre");

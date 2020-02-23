@@ -15,7 +15,7 @@ Cabbage::Cabbage(Node* node) :
 	_zombiePosition(Vec2::ZERO)
 {
 	_node = node;
-	_attack = 40;
+	_attack = 60;
 	_bulletType = BulletType::Cabbage;
 }
 

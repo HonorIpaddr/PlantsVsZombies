@@ -413,6 +413,24 @@ void GSControlLayer::removeShovel()
 	_director->getOpenGLView()->setCursor(_global->userInformation->getImagePath().find("cursor")->second, Point::ANCHOR_TOP_LEFT);
 }
 
+void GSControlLayer::recoveryPlantsColor()
+{
+	for (int i = 0; i < _gameMapInformation->rowNumbers; i++)
+	{
+		for (int j = 0; j < _gameMapInformation->columnNumbers; j++)
+		{
+			if (_gameMapInformation->plantsMap[i][j] != CAN_NOT_PLANT && _gameMapInformation->plantsMap[i][j] != NO_PLANTS)
+			{
+				auto plant = _animationLayer->getChildByTag(SET_TAG(Vec2(j, i)));
+				if (plant)
+				{
+					plant->setColor(Color3B::WHITE);
+				}
+			}
+		}
+	}
+}
+
 void GSControlLayer::judgeLevelIsFinished()
 {
 	/* 关卡结束 */
@@ -474,20 +492,8 @@ void GSControlLayer::mouseMoveControl()
 		}
 
 		/* 循环把植物恢复到原来的颜色 */
-		for (int i = 0; i < _gameMapInformation->rowNumbers; i++)
-		{
-			for (int j = 0; j < _gameMapInformation->columnNumbers; j++)
-			{
-				if (_gameMapInformation->plantsMap[i][j] != CAN_NOT_PLANT && _gameMapInformation->plantsMap[i][j] != NO_PLANTS)
-				{
-					auto plant = _animationLayer->getChildByTag(SET_TAG(Vec2(j, i)));
-					if (plant)
-					{
-						plant->setColor(Color3B::WHITE);
-					}
-				}
-			}
-		}
+		recoveryPlantsColor();
+
 		if (judgeMousePositionIsInMap() && judgeMousePositionHavePlant())  /* 如果在地图范围内 && 种有植物 */
 		{
 			auto plant = _animationLayer->getChildByTag(SET_TAG(_plantsPosition));
@@ -522,6 +528,7 @@ void GSControlLayer::mouseDownControl(EventMouse* eventmouse)
 		if (buttonLayerInformation->mouseSelectImage->isSelectShovel) /* 鼠标上有铲子 */
 		{
 			removeShovel();
+			recoveryPlantsColor();
 		}
 	}
 

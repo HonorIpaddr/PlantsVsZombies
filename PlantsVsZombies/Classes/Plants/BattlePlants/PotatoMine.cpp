@@ -161,7 +161,7 @@ void PotatoMine::explodeHurtZombies()
 
 			if (!zombie->getZombieIsSurvive())
 			{
-				zombie->getZombieAnimation()->setVisible(false);
+				zombie->setZombieOpacity(0);
 			}
 		}
 	}

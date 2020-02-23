@@ -95,6 +95,7 @@ void Zombies::setZombieMove(float delta)
 void Zombies::setZombieOpacity(GLubyte opacity)
 {
 	_zombiesAnimation->setOpacity(opacity);
+	_zombiesAnimation->getChildByName("shadow")->setOpacity(opacity);
 }
 
 void Zombies::setZombiePosition(const Vec2& position)
@@ -174,8 +175,8 @@ void Zombies::zombiesDeleteUpdate(list<Zombies*>::iterator& zombie)
 			setZombiesNumbers(getZombiesNumbers() - 1);  /* 僵尸总数更新 */
 
 			auto zombies = zombie;
-			(*zombie)->getZombieAnimation()->runAction(Sequence::create(DelayTime::create(2.0f),
-				CallFunc::create([=]()
+			(*zombies)->getZombieAnimation()->runAction(Sequence::create(DelayTime::create(2.0f),
+				CallFunc::create([zombies]()
 					{
 						(*zombies)->getIsCanDelete()[1] = true;
 					}), nullptr));
@@ -351,31 +352,30 @@ bool* Zombies::getIsCanDelete()
 
 void Zombies::playZombiesDieAnimation(const string& animationName)
 {
-	auto explode = SkeletonAnimation::createWithData(_global->userInformation->getAnimationData().find(animationName)->second);
-	explode->setPosition(_zombiesAnimation->getPosition() + Vec2(0, -10));
-	explode->setLocalZOrder(_zombiesAnimation->getLocalZOrder());
-	explode->setScale(1.3f);
-	explode->setAnimation(0, "animation", false);
-	_node->addChild(explode);
+	auto ashes = SkeletonAnimation::createWithData(_global->userInformation->getAnimationData().find(animationName)->second);
+	ashes->setPosition(_zombiesAnimation->getPosition() + Vec2(0, -15));
+	ashes->setLocalZOrder(_zombiesAnimation->getLocalZOrder());
+	ashes->setScale(1.3f);
+	ashes->setAnimation(0, "animation", false);
+	_node->addChild(ashes);
 
-	explode->setEventListener([=](spTrackEntry* entry, spEvent* event)
+	ashes->setEventListener([ashes](spTrackEntry* entry, spEvent* event)
 		{
 			if (!strcmp(event->data->name, "Finished"))
 			{
-				explode->runAction(Sequence::create(FadeOut::create(1.0f),CallFunc::create([explode]()
-						{
-							explode->stopAllActions();
-							explode->setVisible(false);
-						}), nullptr));
+				ashes->runAction(Sequence::create(FadeOut::create(1.0f), CallFunc::create([ashes]()
+					{
+						ashes->setVisible(false);
+					}), nullptr));
 			}
 		});
 
-	explode->runAction(Sequence::create(DelayTime::create(3), CallFunc::create([explode]()
+	ashes->runAction(Sequence::create(DelayTime::create(3), CallFunc::create([ashes]()
 		{
-			explode->removeFromParent();
+			ashes->removeFromParent();
 		}), nullptr));
 
-	setZombieAttributeForGameType(explode);
+	setZombieAttributeForGameType(ashes);
 }
 
 void Zombies::setZombieAttributeForGameType()
@@ -582,7 +582,7 @@ void Zombies::zombieLoseShieldAnimation(const std::string& name)
 
 void Zombies::zombiesFadeOutAnimation()
 {
-	_zombiesAnimation->setEventListener([=](spTrackEntry* entry, spEvent* event)
+	_zombiesAnimation->setEventListener([&](spTrackEntry* entry, spEvent* event)
 		{
 			if (!strcmp(event->data->name, "filldown"))
 			{
@@ -595,11 +595,9 @@ void Zombies::zombiesFadeOutAnimation()
 			{
 				_zombiesAnimation->getChildByName("shadow")->runAction(FadeOut::create(1.0f));
 				_zombiesAnimation->runAction(Sequence::create(FadeOut::create(1.0f),
-					CallFunc::create([=]()
+					CallFunc::create([this]()
 						{
 							_zombiesAnimation->setVisible(false);
-							_zombiesAnimation->pause();
-							_zombiesAnimation->stopAllActions();
 						}), nullptr));
 			}
 		});
@@ -647,7 +645,7 @@ void Zombies::setBigZombieAttribute()
 
 		/* 身体变大，动作变慢 */
 		_zombiesAnimation->setScale(1.3f);
-		_zombiesAnimation->setTimeScale(_zombiesAnimation->getTimeScale() - 0.2f);
+		_zombiesAnimation->setTimeScale(_zombiesAnimation->getTimeScale() - 0.3f);
 
 		_isUseForGameType = true;
 	}
