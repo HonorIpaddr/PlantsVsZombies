@@ -58,7 +58,9 @@ void OptionsMenu::createDialog()
 	this->createCheckBox(Vec2(300, 175), Vec2(140, 175), _global->userInformation->getGameText().find("拉伸显示")->second, OptionScene_CheckBox::拉伸显示, "options_checkbox0", "options_checkbox1");
 
 	/* 创建彩蛋 */
-	if (_global->userInformation->getIsShowEggs() && UserDefault::getInstance()->getIntegerForKey(_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str()) >= 52)
+	if (_global->userInformation->getIsShowEggs() &&
+		(UserDefault::getInstance()->getIntegerForKey(_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str()) >= 52 ||
+			UserDefault::getInstance()->getIntegerForKey(_global->userInformation->getSystemDifCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str()) >= 52))
 	{
 		auto button = Button::create(_global->userInformation->getImagePath().find("button")->second, _global->userInformation->getImagePath().find("button_down")->second);
 		button->setTitleLabel(label("制作者", 20, Vec2(0, 0), 0, Color3B::GRAY, 0.5f));

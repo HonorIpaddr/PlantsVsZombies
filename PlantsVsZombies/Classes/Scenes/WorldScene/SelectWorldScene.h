@@ -32,6 +32,7 @@ private:
 	void showDifferentWorlds();
 	void createMouseListener();
     void createGoBack();
+	void createSelectDifficulty();
 
 private:
 	Size _backgroundSize;

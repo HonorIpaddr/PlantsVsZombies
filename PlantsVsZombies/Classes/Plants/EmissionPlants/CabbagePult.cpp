@@ -72,9 +72,9 @@ void CabbagePult::determineRelativePositionPlantsAndZombies()
 	{
 		zombieEatPlant(zombie);      /* 僵尸吃植物 */
 
-		zombieRecoveryMove(zombie);  /* 僵尸恢复移动 */
-
 		plantAttack(zombie);         /* 植物攻击 */
+
+		zombieRecoveryMove(zombie);  /* 僵尸恢复移动 */
 	}
 
 	if (_isCreateCabbage)  /* 如果有僵尸与卷心菜投手在同一行 */

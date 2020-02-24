@@ -21,6 +21,10 @@ World_1::World_1():
 	_worldPosition(UserDefault::getInstance()->getIntegerForKey("WORLD_1_POSITION")),
 	_worldRollingDistance(_worldPosition)
 {
+	srand(time(nullptr));
+
+	/* 播放音乐 */
+	_global->changeBgMusic("mainmusic2", true);
 }
 
 Scene* World_1::createScene()
@@ -34,25 +38,8 @@ bool World_1::init()
 	{
 		return false;
 	}
-	srand(time(nullptr));
 
-	/* 播放音乐 */
-	_global->changeBgMusic("mainmusic2", true);
-
-	/* 读取该世界关卡数据 */
-	if (!_global->userInformation->getUserSelectWorldData().at(0)->isReadWoldInformation)
-	{
-		OpenLevelData::getInstance()->openLevelsData(_global->userInformation->getTextPath().find("GAMEWORLD_1DATAS")->second);
-		_global->userInformation->getUserSelectWorldData().at(0)->isReadWoldInformation = true;
-	}
-
-	_global->userInformation->getUserSelectWorldData().at(0)->levels = 
-		UserDefault::getInstance()->getIntegerForKey(_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str());
-
-	if (_global->userInformation->getUserSelectWorldData().at(0)->levels == 0)
-	{
-		_global->userInformation->getUserSelectWorldData().at(0)->levels = 1;
-	}
+	readWorldLevel();
 
 	createBackground();
 
@@ -576,6 +563,27 @@ void World_1::createButtonListener(ui::Button* button, const int& ID)
 				break;
 			}
 		});
+}
+
+void World_1::readWorldLevel()
+{
+	/* 读取该世界关卡数据 */
+	if (!_global->userInformation->getUserSelectWorldData().at(0)->isReadWoldInformation)
+	{
+		OpenLevelData::getInstance()->openLevelsData(_global->userInformation->getTextPath().find(_global->userInformation->getGameDifficulty() ? "GAMEWORLD_1DATAS_DIF" : "GAMEWORLD_1DATAS")->second);
+		_global->userInformation->getUserSelectWorldData().at(0)->isReadWoldInformation = true;
+	}
+
+	_global->userInformation->getUserSelectWorldData().at(0)->levels =
+		UserDefault::getInstance()->getIntegerForKey(
+			_global->userInformation->getGameDifficulty() ?
+			_global->userInformation->getSystemDifCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str() :
+			_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str());
+	
+	if (_global->userInformation->getUserSelectWorldData().at(0)->levels == 0)
+	{
+		_global->userInformation->getUserSelectWorldData().at(0)->levels = 1;
+	}
 }
 
 void World_1::createGoBack()

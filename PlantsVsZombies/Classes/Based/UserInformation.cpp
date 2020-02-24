@@ -11,7 +11,8 @@ UserInformation::UserInformation():
   _isUpdate(false)
 , _userName("·ßÅ­µÄÐ¡½©Ê¬")
 , _userCaveFileNameKey{ "USERNAMEDATA","USERNAMEDATA_2","USERNAMEDATA_3","USERNAMEDATA_4","USERNAMEDATA_5","USERNAMEDATA_6","USERNAMEDATA_7","USERNAMEDATA_8" }
-, _systemCaveFileName{ "WORLD_1_LEVELS","WORLD_1_LEVELS_2","WORLD_1_LEVELS_3","WORLD_1_LEVELS_4","WORLD_1_LEVELS_5","WORLD_1_LEVELS_6","WORLD_1_LEVELS_7","WORLD_1_LEVELS_8" }
+, _systemCaveFileName_difficult{ "WORLD_1_LEVELS","WORLD_1_LEVELS_2","WORLD_1_LEVELS_3","WORLD_1_LEVELS_4","WORLD_1_LEVELS_5","WORLD_1_LEVELS_6","WORLD_1_LEVELS_7","WORLD_1_LEVELS_8" }
+, _systemCaveFileName{ "WORLD_1_LEVELS_DIF","WORLD_1_LEVELS_2_DIF","WORLD_1_LEVELS_3_DIF","WORLD_1_LEVELS_4_DIF","WORLD_1_LEVELS_5_DIF","WORLD_1_LEVELS_6_DIF","WORLD_1_LEVELS_7_DIF","WORLD_1_LEVELS_8_DIF" }
 , _soundEffectVolume(0.5f)
 , _backGroundMusicVolume(0.2f)
 , _userCaveFileNumber(-1)
@@ -21,6 +22,7 @@ UserInformation::UserInformation():
 , _sunNumbers(100)
 , _coinNumbers(0)
 , _nowFps(60)
+, _gameDifficulty(0)
 , _mainToWorld(false)
 , _background(nullptr)
 , _currentPlayLevels(1)
@@ -140,6 +142,11 @@ string& UserInformation::getSystemCaveFileName(const int id)
     return _systemCaveFileName[id];
 }
 
+string& UserInformation::getSystemDifCaveFileName(const int id)
+{
+    return _systemCaveFileName_difficult[id];
+}
+
 list<int>& UserInformation::getBackgroundMusic()
 {
     return _backGroundMusic;
@@ -223,6 +230,16 @@ Sprite* UserInformation::getBackground() const
 string& UserInformation::getCurrentPlayWorldName()
 {
     return _currentPlayWorldName;
+}
+
+int UserInformation::getGameDifficulty() const
+{
+    return _gameDifficulty;
+}
+
+void UserInformation::setGameDifficulty(const int difficulty)
+{
+    _gameDifficulty = difficulty;
 }
 
 void UserInformation::setCurrentPlayWorldName(const string& worldName)

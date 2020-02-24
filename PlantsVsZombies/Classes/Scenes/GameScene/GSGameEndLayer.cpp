@@ -157,7 +157,9 @@ void GSGameEndLayer::caveLevelNumber()
 	if (_global->userInformation->getUserSelectWorldData().at(_global->userInformation->getCurrentPlayWorldTag())->levels == _global->userInformation->getCurrentPlayLevels())
 	{
 		UserDefault::getInstance()->setIntegerForKey(
-			_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str(), 
+			_global->userInformation->getGameDifficulty() ?
+			_global->userInformation->getSystemDifCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str() :
+			_global->userInformation->getSystemCaveFileName(_global->userInformation->getUserCaveFileNumber()).c_str(),
 			++_global->userInformation->getUserSelectWorldData().at(0)->levels);
 		UserDefault::getInstance()->flush();
 	}

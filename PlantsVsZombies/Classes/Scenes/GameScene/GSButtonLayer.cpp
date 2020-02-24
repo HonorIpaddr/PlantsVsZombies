@@ -196,7 +196,7 @@ void GSButtonLayer::showSeedBank()
 void GSButtonLayer::showShovelBank()
 {
 	auto shovelBank = Button::create(_global->userInformation->getImagePath().find("ShovelBank")->second);
-	shovelBank->setPosition(_openLevelData->readLevelData(_openLevelData->getLevelNumber())->getGameType().size() > 0 ? Vec2(1420, 1080) : Vec2(1570, 1080));
+	shovelBank->setPosition(_openLevelData->readLevelData(_openLevelData->getLevelNumber())->getGameType().size() > 0 ? Vec2(1420, 1080) : Vec2(1520, 1080));
 	shovelBank->setScale(0.6f);
 	shovelBank->setAnchorPoint(Vec2(0, 1));
 	shovelBank->setName("ShovelBank");

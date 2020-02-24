@@ -54,6 +54,11 @@ public:
 	 */
 	int getLevelNumber() const;
 
+	/**
+	 ≥ı ºªØ
+	 */
+	void documentInit();
+
 private:
 	OpenLevelData():_document(new Document), _levelNumber(-1){}
 	~OpenLevelData() {}

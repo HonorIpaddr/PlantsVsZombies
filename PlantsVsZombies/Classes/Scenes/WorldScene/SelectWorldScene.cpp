@@ -58,6 +58,7 @@ bool SelectWorldScene::init()
 	showDifferentWorlds();
 	createMouseListener();
 	createGoBack();
+	createSelectDifficulty();
 	
 	return true;
 }
@@ -81,6 +82,44 @@ void SelectWorldScene::createGoBack()
 				Director::getInstance()->replaceScene(MainMenu::createScene());
 				break;
 			}
+		});
+}
+
+void SelectWorldScene::createSelectDifficulty()
+{
+	_global->userInformation->setGameDifficulty(UserDefault::getInstance()->getIntegerForKey("DIFFICULTY"));
+
+	auto checkbox = CheckBox::create();
+	checkbox->loadTextureBackGround(_global->userInformation->getImagePath().find("CheckBox2")->second);
+	checkbox->loadTextureFrontCross(_global->userInformation->getImagePath().find("CheckBox")->second);
+	checkbox->setPosition(Vec2(100,1080));
+	checkbox->setAnchorPoint(Vec2(0, 1));
+	checkbox->setSelected(_global->userInformation->getGameDifficulty() ? true : false);
+	this->addChild(checkbox);
+	
+	auto text = Text::create();
+	text->setPosition(Vec2(47, -20));
+	text->setTextColor(Color4B(0, 255, 255, 200));
+	text->setFontName("resources/fonts/fzse_gbk.ttf");
+	text->setFontSize(30);
+	text->setString(_global->userInformation->getGameDifficulty() ? "噩梦模式" : "简单模式");
+	checkbox->addChild(text);
+
+	checkbox->addEventListener([=](Ref* sender, CheckBox::EventType type)
+		{
+			switch (type)
+			{
+			case cocos2d::ui::CheckBox::EventType::SELECTED:
+				_global->userInformation->setGameDifficulty(1);
+				text->setString("噩梦模式");
+				break;
+			case cocos2d::ui::CheckBox::EventType::UNSELECTED:
+				_global->userInformation->setGameDifficulty(0);
+				text->setString("简单模式");
+				break;
+			}
+			_global->userInformation->getUserSelectWorldData().at(0)->isReadWoldInformation = false;
+			UserDefault::getInstance()->setIntegerForKey("DIFFICULTY", _global->userInformation->getGameDifficulty());
 		});
 }
 

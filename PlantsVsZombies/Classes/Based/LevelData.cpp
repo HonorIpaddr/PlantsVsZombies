@@ -21,6 +21,7 @@ bool OpenLevelData::openLevelsData(const string& worlddata)
 	/* ½âÃÜ */
 	decrypt(str, passWords);
 	
+	documentInit();
 	_document->Parse<rapidjson::kParseDefaultFlags>(passWords);
 
 	free(passWords);
@@ -30,10 +31,11 @@ bool OpenLevelData::openLevelsData(const string& worlddata)
 	return true;
 }
 
-void OpenLevelData::decrypt(char* cSrc, char* cDest) // ·ÏÆú ËÙ¶ÈÌ«Âý!!! 
+void OpenLevelData::decrypt(char* cSrc, char* cDest) 
 {
 	int   i, h, l, m, n, j = 0;
-	for (i = 0; i < (int)strlen(cSrc); i = i + 2)
+	int len = strlen(cSrc);
+	for (i = 0; i < len; i = i + 2)
 	{
 		h = (cSrc[i] - 'x');
 		l = (cSrc[i + 1] - 'z');
@@ -94,6 +96,20 @@ void OpenLevelData::setLevelNumber(const int levelNumber)
 int OpenLevelData::getLevelNumber() const
 {
 	return _levelNumber;
+}
+
+void OpenLevelData::documentInit()
+{
+	/*if (!_document->Empty())
+	{
+		_document->Clear();
+	}*/
+	for (auto data : _levelData)
+	{
+		delete data.second; 
+		data.second = nullptr;
+	}
+	_levelData.clear();
 }
 
 LevelData::LevelData():

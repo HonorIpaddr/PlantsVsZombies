@@ -40,7 +40,7 @@ struct WorldData
         isBeginShowEggs(false),
         isReadWoldInformation(false)
     {}
-    int levels;                      // 当前关数
+    int levels;                      // 当前世界当前最高关卡数
     bool isBeginShowEggs;            
     bool isReadWoldInformation;      // 是否读取世界信息
 };
@@ -66,6 +66,7 @@ public:
     string& getUserCaveFileName(const int id);
     string& getUserCaveFileNameKey(const int id);
     string& getSystemCaveFileName(const int id);
+    string& getSystemDifCaveFileName(const int id);
     list<int>& getBackgroundMusic();
     float getSoundEffectVolume() const;
     float getBackGroundMusicVolume() const;
@@ -83,6 +84,8 @@ public:
     bool getIsShowEggs() const;
     Sprite* getBackground() const;
     string& getCurrentPlayWorldName();
+    int getGameDifficulty() const;
+    void setGameDifficulty(const int difficulty);
     void setCurrentPlayWorldName(const string& worldName);
     void setUserSelectCrads(vector<UserSelectCard>& card);
     void setSelectWorldName(WorldName name);
@@ -115,16 +118,16 @@ CC_CONSTRUCTOR_ACCESS:
 
 private:
 
-    vector<UserSelectCard> _userSelectCard;               // 用户一次闯关所选植物
-    vector<WorldData*> _userSelectWorldData;              // 用户所选世界游戏数据
+    vector<UserSelectCard> _userSelectCard;              // 用户一次闯关所选植物
+    vector<WorldData*> _userSelectWorldData;             // 用户所选世界游戏数据
 
-    WorldName _selectWorldName;                           // 所选世界
+    WorldName _selectWorldName;                          // 所选世界
 
-    CheckBox::EventType _showInformation;                 // 显示fps
-    CheckBox::EventType _highFPS;                         // 高帧率
-    CheckBox::EventType _fullScreen;                      // 全屏
-    CheckBox::EventType _cursorNotHide;                   // 鼠标隐藏
-    CheckBox::EventType _stretchingShow;                  // 拉伸显示
+    CheckBox::EventType _showInformation;                // 显示fps
+    CheckBox::EventType _highFPS;                        // 高帧率
+    CheckBox::EventType _fullScreen;                     // 全屏
+    CheckBox::EventType _cursorNotHide;                  // 鼠标隐藏
+    CheckBox::EventType _stretchingShow;                 // 拉伸显示
 
     map<string, spSkeletonData*> _animationData;         // 动画存储
     map<string, string> _gameText;                       // 游戏文本
@@ -138,6 +141,7 @@ private:
     string _userCaveFileName[8];                         // 用户自己定义存档名称（主要用于显示）
     string _userCaveFileNameKey[8];                      // 用户存档key
     string _systemCaveFileName[8];                       // 系统定义存档名称（用于存取，防止用户定义的为空)
+    string _systemCaveFileName_difficult[8];             // 系统定义困难存档名称（用于存取，防止用户定义的为空)
     
     float _soundEffectVolume;                            // 音效
     float _backGroundMusicVolume;                        // 音乐
@@ -155,7 +159,8 @@ private:
     bool _mainToWorld;                                   // 标记主菜单到世界
     bool _isShowEggs;                                    // 是否显示彩蛋
 
-    int _currentPlayLevels;                              // 当前关数 
+    int _currentPlayLevels;                              // 当前关数
+    int _gameDifficulty;                                 // 游戏难度
     int _currentPlayWorldTag;                            // 当前世界编号 
     Sprite* _background;                                 // 当前世界地图 
     string _currentPlayWorldName;                        // 当前世界名字

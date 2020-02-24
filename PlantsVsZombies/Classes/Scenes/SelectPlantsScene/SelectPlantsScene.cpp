@@ -194,7 +194,7 @@ void SelectPlantsScene::readyTextCallBack(Node* node, const std::string& name, c
 		_scrollLayer->getChildByName("_scrollLayer")->removeChildByName("previewBackgroundImage");
 
 		_global->userInformation->setUserSelectCrads(_spriteLayer_->seedBankButton);
-		_global->userInformation->setSunNumbers(10000); //设定初始阳光数 
+		_global->userInformation->setSunNumbers(100); //设定初始阳光数 
 
 		Director::getInstance()->replaceScene(GameScene::createScene());
 		break;

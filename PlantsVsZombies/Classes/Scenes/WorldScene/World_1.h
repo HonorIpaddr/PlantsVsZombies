@@ -33,6 +33,7 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual bool init(); 
 
 private:
+	void readWorldLevel();
 	void createGoBack();
 	void createBackground();
 	void createScrollView();
@@ -42,6 +43,7 @@ private:
 	Sprite* createSprite(const std::string& name, const Vec2& position, const float& scale, const int& zorder, const float& speed, bool IsFlipped = false);
 	Sprite* createSprite(Node* node, const std::string& name, const Vec2& position, const float& scale, const int& zorder,bool IsFlipped = false);
 	void createMouseListener();
+
 private:
 	Global* _global;
 	Director* _director;
