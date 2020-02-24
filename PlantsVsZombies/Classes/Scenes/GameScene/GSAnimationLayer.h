@@ -20,6 +20,7 @@ class GSAnimationLayer :public Layer
 public:
 	CREATE_FUNC(GSAnimationLayer);
 	static GSAnimationLayer* create(Node* node);
+	void stopRandomSun();
 	void addLayer(Node* node, const int order, const string& name) { node->addChild(this, order, name);}
 	void plantPlants();
 	void deletePlants();

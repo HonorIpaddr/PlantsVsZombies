@@ -29,7 +29,7 @@ GSAnimationLayer::GSAnimationLayer(Node* node) :
 
 GSAnimationLayer::~GSAnimationLayer()
 {
-	delete _randomSuns;
+	if (_randomSuns)delete _randomSuns;
 }
 
 GSAnimationLayer* GSAnimationLayer::create(Node* node)
@@ -42,6 +42,11 @@ GSAnimationLayer* GSAnimationLayer::create(Node* node)
 	}
 	CC_SAFE_DELETE(object);
 	return nullptr;
+}
+
+void GSAnimationLayer::stopRandomSun()
+{
+	_sunLayer->stopAllActions();
 }
 
 bool GSAnimationLayer::init()
@@ -171,11 +176,11 @@ void GSAnimationLayer::gameMainLoop(float delta)
 
 void GSAnimationLayer::zombiesEventUpdate(float delta)
 {
-	for (auto& zombie = ZombiesGroup.begin(); zombie != ZombiesGroup.end();)
+	for (auto zombie = ZombiesGroup.begin(); zombie != ZombiesGroup.end();)
 	{
 		(*zombie)->setZombieMove(delta);
 		(*zombie)->zombieInjuredEventUpdate();
-		(*zombie)->judgeZombieWin(zombie);
+		Zombies::judgeZombieWin(zombie);
 		Zombies::zombiesDeleteUpdate(zombie);
 	}
 }
@@ -227,7 +232,7 @@ void GSAnimationLayer::plantsDeleteUpdate(map<int, Plants*>::iterator& plant)
 
 void GSAnimationLayer::bulletEventUpdate()
 {
-	for (auto& bullet = BulletGroup.begin(); bullet != BulletGroup.end();)
+	for (auto bullet = BulletGroup.begin(); bullet != BulletGroup.end();)
 	{
 		(*bullet)->bulletAndZombiesCollision();
 		
@@ -237,14 +242,14 @@ void GSAnimationLayer::bulletEventUpdate()
 
 void GSAnimationLayer::sunsDeleteUpdate()
 {
-	for (auto& sun = SunsGroup.begin(); sun != SunsGroup.end();)
+	for (auto sun = SunsGroup.begin(); sun != SunsGroup.end();)
 	{
 		Sun::deleteSun(sun);
 	}
 }
 void GSAnimationLayer::carsEventUpdate()
 {
-	for (auto& car = CarsGroup.begin(); car != CarsGroup.end();)
+	for (auto car = CarsGroup.begin(); car != CarsGroup.end();)
 	{
 		(*car)->createCarListener();
 		(*car)->deleteCar(car);

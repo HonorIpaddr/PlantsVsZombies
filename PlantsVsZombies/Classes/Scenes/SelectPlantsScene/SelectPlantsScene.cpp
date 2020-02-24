@@ -14,12 +14,12 @@
 #include "Based/GameType.h"
 
 SelectPlantsScene::SelectPlantsScene() :
-	_controlLayer(Layer::create()),
-	_scrollLayer(Layer::create()),
+	_controlLayer(nullptr),
+	_scrollLayer(nullptr),
 	_spriteLayer(nullptr),
 	_spriteLayer_(nullptr),
 	_requirement(nullptr),
-	_scrollView(extension::ScrollView::create()),
+	_scrollView(nullptr),
 	_director(Director::getInstance()),
 	_global(Global::getInstance())
 {
@@ -27,8 +27,7 @@ SelectPlantsScene::SelectPlantsScene() :
 
 SelectPlantsScene::~SelectPlantsScene()
 {
-	delete _spriteLayer;
-	delete _requirement;
+	if (_requirement) delete _requirement;
 }
 
 Scene* SelectPlantsScene::createScene()
@@ -38,10 +37,7 @@ Scene* SelectPlantsScene::createScene()
 
 bool SelectPlantsScene::init()
 {
-	if (!Scene::init())
-	{
-		return false;
-	}
+	if (!Scene::init())return false;
 
 	createBackgroundLayer();
 	createControlLayer();
@@ -53,12 +49,14 @@ bool SelectPlantsScene::init()
 void SelectPlantsScene::createBackgroundLayer()
 {
 	/* 设置容器大小 */
+	_scrollLayer = Layer::create();
 	_scrollLayer->setContentSize(Size(2930, 1080));
 
 	/* 创建容器中的东西（精灵）*/
 	SPSBackgroundLayer::create()->addLayer(_scrollLayer);
 	
 	//创建滚动视图
+	_scrollView = extension::ScrollView::create();
 	_scrollView = extension::ScrollView::create(_director->getWinSize(), _scrollLayer);
 	_scrollView->setPosition(Vec2(0, 0));
 	_scrollView->setDirection(extension::ScrollView::Direction::HORIZONTAL);//设置只能纵向滚动
@@ -74,6 +72,7 @@ void SelectPlantsScene::createBackgroundLayer()
 
 void SelectPlantsScene::createControlLayer()
 {
+	_controlLayer = Layer::create();
 	SPSControlLayer::create()->addLayer(_controlLayer);
 	this->addChild(_controlLayer,1000);
 }
@@ -115,7 +114,7 @@ void SelectPlantsScene::createSelectPlantsDialog()
 	_controlLayer->getChildByName("ControlLayer")->removeChildByName("username");
 
 	_spriteLayer_ = SPSSpriteLayer::create();
-	_spriteLayer = new Layer;
+	_spriteLayer = Layer::create();
 	_spriteLayer_->addLayer(_spriteLayer);
 	_spriteLayer->setGlobalZOrder(1);
 	this->addChild(_spriteLayer);
@@ -195,7 +194,7 @@ void SelectPlantsScene::readyTextCallBack(Node* node, const std::string& name, c
 		_scrollLayer->getChildByName("_scrollLayer")->removeChildByName("previewBackgroundImage");
 
 		_global->userInformation->setUserSelectCrads(_spriteLayer_->seedBankButton);
-		_global->userInformation->setSunNumbers(100); //设定初始阳光数 
+		_global->userInformation->setSunNumbers(10000); //设定初始阳光数 
 
 		Director::getInstance()->replaceScene(GameScene::createScene());
 		break;

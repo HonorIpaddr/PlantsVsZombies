@@ -37,9 +37,6 @@ enum class ZombiesType
 class Zombies :public Node
 {
 public:
-	Zombies();
-	~Zombies();
-
 	/**
 	 *获取各种僵尸种类动画名称
 	 */
@@ -61,6 +58,16 @@ public:
 	static void setZombiesNumbers(const unsigned int numbers);
 
 	/**
+	 *判断僵尸赢
+	 */
+	static void judgeZombieWin(list<Zombies*>::iterator zombie);
+
+	/**
+	 *僵尸输赢初始化
+	 */
+	static void zombiesWinOrLoseInit();
+
+	/**
 	 *创建僵尸
 	 */
 	virtual void createZombie() = 0;
@@ -74,11 +81,6 @@ public:
 	 *僵尸受伤事件更新
 	 */
 	virtual void zombieInjuredEventUpdate() = 0;
-
-	/**
-	 *判断僵尸赢
-	 */
-	virtual void judgeZombieWin(list<Zombies*>::iterator& zombie);
 
 	/**
 	 *创建僵尸影子
@@ -408,6 +410,10 @@ protected:
 	 */
 	virtual void setZombieBodyShieldThirdInjure(const string& oldName, const string& newName);
 
+CC_CONSTRUCTOR_ACCESS:
+	Zombies();
+	~Zombies();
+
 private:
 	void setSmallZombieAttribute();
 	void setBigZombieAttribute();
@@ -446,9 +452,10 @@ protected:
 	static unsigned int _zombiesNumbers;      // 僵尸数量
 
 private:
-	bool _zombieIsWin;
 	int _zombieEatPlantNumber;
 	OpenLevelData* _openLevelData;
-	GSGameEndLayer* _gameEndLayer;
-	GSGameResultJudgement* _gameResultJudgement;
+
+	static bool _zombieIsWin;
+	static GSGameEndLayer* _gameEndLayer;
+	static GSGameResultJudgement* _gameResultJudgement;
 };

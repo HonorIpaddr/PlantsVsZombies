@@ -192,6 +192,7 @@ void GameEasterEggs::renewCallBack()
 void GameEasterEggs::createEggText()
 {
 	_audioId = _global->changeBgMusic("ZombiesWinEggs", false);
+	AudioEngine::setVolume(_audioId, 1.0f);
 
 	auto sumTime = QuitMenu::getSumRunTime();
 	int hour = sumTime / 3600;
@@ -241,7 +242,9 @@ void GameEasterEggs::createEggText()
 								auto letter = Eggstext->getLetter(i);
 								if (letter)
 								{
-									letter->runAction(Sequence::create(DelayTime::create(0.05f * i), Spawn::create(JumpBy::create(0.7f, Vec2(0, 0), 50, 1), RotateBy::create(0.7f, 360), Sequence::create(TintTo::create(0.35f, Color3B::RED), TintTo::create(0.35f, I % 2 == 0 ? Color3B::GREEN : Color3B(0, 255, 255))), nullptr), nullptr));
+									letter->runAction(Sequence::create(DelayTime::create(0.05f * i), 
+										Spawn::create(JumpBy::create(0.7f, Vec2(0, 0), 50, 1), RotateBy::create(0.7f, 360), 
+											Sequence::create(TintTo::create(0.35f, Color3B::RED), TintTo::create(0.35f, I % 2 == 0 ? Color3B::GREEN : Color3B(0, 255, 255))), nullptr), nullptr));
 								}
 							}
 						}), DelayTime::create(Eggstext->getStringLength() * 0.05f / 3.0f), nullptr)));
@@ -269,10 +272,8 @@ void GameEasterEggs::musicCallBack()
 		{
 			this->getChildByName("Text")->setVisible(false);
 
-			_global->userInformation->getBackgroundMusic().clear();
-			_global->userInformation->getBackgroundMusic().push_back(AudioEngine::play2d(_global->userInformation->getMusicPath().find("mainmusic")->second, true));
-			AudioEngine::setVolume(*_global->userInformation->getBackgroundMusic().begin(), _global->userInformation->getBackGroundMusicVolume());
-
+			_global->changeBgMusic("mainmusic", true);
+			
 			/* 创建按钮 */
 			auto button = ui::Button::create(_global->userInformation->getImagePath().find("SeedChooser_Button2")->second, _global->userInformation->getImagePath().find("SeedChooser_Button2_Glow")->second);
 			button->setTitleText(_global->userInformation->getGameText().find("退出")->second);

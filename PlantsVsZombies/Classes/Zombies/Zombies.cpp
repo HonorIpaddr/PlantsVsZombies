@@ -14,13 +14,15 @@
 #include "Scenes/GameScene/GSData.h"
 
 unsigned int Zombies::_zombiesNumbers = 0;
+bool Zombies::_zombieIsWin = false;
+GSGameEndLayer* Zombies::_gameEndLayer = nullptr;
+GSGameResultJudgement* Zombies::_gameResultJudgement = nullptr;
 
 Zombies::Zombies() :
 	_node(nullptr)
 ,   _attackHeadSoundEffectType(0)
 ,   _attackBodySoundEffectType(0)
 ,   _animationId(-1)
-,   _zombieIsWin(false)
 ,	_isEat(false)
 ,	_isEatGarlic(false)
 ,	_isUseForGameType(false)
@@ -29,8 +31,6 @@ Zombies::Zombies() :
 ,	_isHaveShield(false)
 ,   _isShowLoseLimbsAnimation(true)
 ,   _isCanDelete{false,false}
-,   _gameResultJudgement(nullptr)
-,   _gameEndLayer(nullptr)
 ,   _zombieEatPlantNumber(-1)
 ,	_openLevelData(OpenLevelData::getInstance())
 ,	_global(Global::getInstance())
@@ -40,8 +40,6 @@ Zombies::Zombies() :
 
 Zombies::~Zombies()
 {
-	delete _gameResultJudgement;
-	delete _gameEndLayer;
 }
 
 void Zombies::zombieInit(const string& animation_name)
@@ -421,9 +419,9 @@ float Zombies::getLocalZOrder(const int& positiionY) const
 	return 0;
 }
 
-void Zombies::judgeZombieWin(list<Zombies*>::iterator& zombie)
+void Zombies::judgeZombieWin(list<Zombies*>::iterator zombie)
 {
-	if (_gameResultJudgement == nullptr)
+	if (!_gameResultJudgement)
 	{
 		_gameResultJudgement = new GSGameResultJudgement();
 	}
@@ -434,8 +432,15 @@ void Zombies::judgeZombieWin(list<Zombies*>::iterator& zombie)
 		_zombieIsWin = true;
 		_gameEndLayer = GSGameEndLayer::create();
 		_gameEndLayer->breakThrough(zombieWin);
-		_director->getRunningScene()->addChild(_gameEndLayer, 10);
+		Director::getInstance()->getRunningScene()->addChild(_gameEndLayer, 10);
 	}
+}
+
+void Zombies::zombiesWinOrLoseInit()
+{
+	_zombieIsWin = false;
+	delete _gameResultJudgement;
+	_gameResultJudgement = nullptr;
 }
 
 void Zombies::createZombieShadow()
@@ -582,6 +587,7 @@ void Zombies::zombieLoseShieldAnimation(const std::string& name)
 
 void Zombies::zombiesFadeOutAnimation()
 {
+	_zombiesAnimation->setTimeScale(0.6f + rand() % 4567 / 10000.0f);
 	_zombiesAnimation->setEventListener([&](spTrackEntry* entry, spEvent* event)
 		{
 			if (!strcmp(event->data->name, "filldown"))

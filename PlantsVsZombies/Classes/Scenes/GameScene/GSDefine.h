@@ -65,4 +65,4 @@
 
 // delete group
 #define DELETE_MAP_GROUP(__MAP__GROUP__) do{ for(auto& __ITERATOR__ : __MAP__GROUP__){ delete __ITERATOR__.second; __ITERATOR__.second = nullptr;} __MAP__GROUP__.clear(); }while(0)
-#define DELETE_LIST_GROUP(__LIST__GROUP__) do{ for(auto& __ITERATOR__ : __LIST__GROUP__){ delete __ITERATOR__; __ITERATOR__ = nullptr;} __LIST__GROUP__.clear(); }while(0)
+#define DELETE_LIST_GROUP(__LIST__GROUP__) do{ for(auto __ITERATOR__ : __LIST__GROUP__){ delete __ITERATOR__; __ITERATOR__ = nullptr;} __LIST__GROUP__.clear(); }while(0)

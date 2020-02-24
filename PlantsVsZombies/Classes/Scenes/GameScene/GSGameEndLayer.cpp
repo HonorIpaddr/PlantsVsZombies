@@ -27,7 +27,7 @@ GSGameEndLayer::GSGameEndLayer():
 
 GSGameEndLayer::~GSGameEndLayer()
 {
-	delete _userWinRequirement;
+	if (_userWinRequirement)delete _userWinRequirement;
 }
 
 bool GSGameEndLayer::init()
@@ -81,6 +81,7 @@ void GSGameEndLayer::successfullEntry()
 void GSGameEndLayer::breakThrough(GameTypes gameType)
 {
 	GSPauseQuitLayer::pauseLayer();
+	_director->getScheduler()->setTimeScale(1.0f);
 
 	/* 记录闯关失败个数 */
 	UserDefault::getInstance()->setIntegerForKey("BREAKTHROUGH", _global->userInformation->getBreakThroughnumbers());
@@ -121,8 +122,7 @@ void GSGameEndLayer::showFailDialog(GameTypes gameType)
 				break;
 			case ui::Widget::TouchEventType::ENDED:
 				_userWinRequirement->setDelectDialogAction();
-				_director->getScheduler()->setTimeScale(1.0f);
-				_director->replaceScene(TransitionFade::create(0.5f, World_1::createScene()));
+				_director->replaceScene(TransitionFade::create(1.0f, World_1::createScene()));
 				break;
 			}
 		});
@@ -144,7 +144,7 @@ void GSGameEndLayer::showFailText()
 	lose->runAction(Sequence::create(JumpTo::create(1.0f, Director::getInstance()->getWinSize() / 2.0f, 250, 3),
 		DelayTime::create(5),CallFunc::create([this]()
 			{
-				_director->replaceScene(TransitionFade::create(0.5f, World_1::createScene()));
+				_director->replaceScene(TransitionFade::create(1.0f, World_1::createScene()));
 			}),
 		nullptr));
 	layer->addChild(lose);
@@ -229,8 +229,7 @@ void GSGameEndLayer::rewardCoin(Button* button)
 									/* 保存金币数 */
 									UserDefault::getInstance()->setIntegerForKey("COINNUMBERS", _global->userInformation->getCoinNumbers());
 									UserDefault::getInstance()->flush();
-									_director->getScheduler()->setTimeScale(1.0f);
-									_director->replaceScene(World_1::createScene());
+									_director->replaceScene(TransitionFade::create(1.0f, World_1::createScene()));
 								}), nullptr));
 					}), nullptr));
 		}

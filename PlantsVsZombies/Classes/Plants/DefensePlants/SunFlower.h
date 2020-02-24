@@ -14,6 +14,7 @@ class SunFlower :public Plants
 {
 public:
 	static SunFlower* create(Node* node = nullptr);
+	static void stopSun();
 	void createRandomSuns();
 	Sprite* createPlantImage() override;
 	void createPlantAnimation() override;
@@ -23,6 +24,7 @@ CC_CONSTRUCTOR_ACCESS:
 	~SunFlower();
 
 private:
+	static void sunRecovery(Sun* sun);
 	void createSuns();
 	void goodsRecovery();
 	void createListener();

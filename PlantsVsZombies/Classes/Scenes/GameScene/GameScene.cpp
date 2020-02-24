@@ -33,6 +33,7 @@ GameScene::~GameScene()
 	DELETE_LIST_GROUP(CarsGroup);
 
 	Zombies::setZombiesNumbers(0);
+	Zombies::zombiesWinOrLoseInit();
 }
 
 Scene* GameScene::createScene()

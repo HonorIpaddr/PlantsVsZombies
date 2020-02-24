@@ -15,6 +15,7 @@ enum class GameTypes;
 class UserWinRequirement :public Node
 {
 public:
+	static UserWinRequirement* UserWinRequirement::create(Node* node);
 	void createDialogBox(GameTypes finishedid);
 	void setParent(Node* node);
 	void setButtonVisible(bool visible);

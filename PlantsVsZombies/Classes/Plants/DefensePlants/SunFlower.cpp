@@ -41,6 +41,14 @@ SunFlower* SunFlower::create(Node* node)
 	return nullptr;
 }
 
+void SunFlower::stopSun()
+{
+	for (auto sun : SunsGroup)
+	{
+		sunRecovery(sun);
+	}
+}
+
 void SunFlower::createRandomSuns()
 {
 	/* 获取太阳层 */
@@ -104,6 +112,25 @@ void SunFlower::createListener()
 	goodsRecovery();
 }
 
+void SunFlower::sunRecovery(Sun* sun)
+{
+	auto temporary = sun;
+	sun->setEnable(false);
+	sun->getSun()->stopAllActions();
+	sun->getSun()->runAction(Sequence::create(EaseExponentialOut::create(MoveTo::create(0.5f, Vec2(290, 1010))),
+		Spawn::create(ScaleTo::create(0.2f, 0.3f), FadeOut::create(0.2f), nullptr),
+		CallFunc::create([=]()
+			{
+				Global::getInstance()->userInformation->setSunNumbers(Global::getInstance()->userInformation->getSunNumbers() + 50);
+				informationLayerInformation->updateSunNumbers();
+				backgroundLayerInformation->gameType->updateRequirementNumbers("阳光数量增加");
+			}), DelayTime::create(5.0f),
+				CallFunc::create([temporary]()
+					{
+						temporary->getSun()->setVisible(false);
+					}), nullptr));
+}
+
 void SunFlower::goodsRecovery()
 {
 	auto linster = EventListenerTouchOneByOne::create();
@@ -115,21 +142,7 @@ void SunFlower::goodsRecovery()
 			if ( sun->getSun()->getBoundingBox().containsPoint(p) && sun->getEnable())
 			{
 				playSoundEffect("points");
-				auto temporary = sun;
-				sun->setEnable(false);
-				sun->getSun()->stopAllActions();
-				sun->getSun()->runAction(Sequence::create(EaseExponentialOut::create(MoveTo::create(0.5f, Vec2(290, 1010))),
-					Spawn::create(ScaleTo::create(0.2f, 0.3f), FadeOut::create(0.2f), nullptr),
-					CallFunc::create([=]()
-						{
-							_global->userInformation->setSunNumbers(_global->userInformation->getSunNumbers() + 50);
-							informationLayerInformation->updateSunNumbers();
-							backgroundLayerInformation->gameType->updateRequirementNumbers("阳光数量增加");
-						}), DelayTime::create(5.0f), 
-					CallFunc::create([temporary]()
-						{ 
-							temporary->getSun()->setVisible(false);
-						}), nullptr));
+				sunRecovery(sun);
 			}
 		}
 		return true;

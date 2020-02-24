@@ -33,15 +33,17 @@ GameMapInformation::GameMapInformation():
 GSControlLayer::GSControlLayer():
 	_global(Global::getInstance())
 ,   _openLevelData(OpenLevelData::getInstance())
-,	_gameMapInformation(new GameMapInformation)
+,	_gameMapInformation(nullptr)
 ,   _selectPlantsTag(PlantsType::None)
 ,   _plantPreviewImage(nullptr)
 ,   _animationLayer(nullptr)
 ,   _gameEndShieldLayer(nullptr)
-,   _zombiesAppearControl(new ZombiesAppearControl)
+,   _zombiesAppearControl(nullptr)
 {
 	srand(time(nullptr));
 	_levelData = _openLevelData->readLevelData(_openLevelData->getLevelNumber())->getMunchZombiesFrequency();
+	_gameMapInformation = new GameMapInformation();
+	_zombiesAppearControl = new ZombiesAppearControl();
 }
 
 GSControlLayer::~GSControlLayer()
@@ -460,7 +462,10 @@ void GSControlLayer::setGameEnd()
 {
 	unschedule("mainUpdate");
 	unschedule("zombiesComing");
+	SunFlower::stopSun();
 	Plants::stopPlantsAllAction();
+	animationLayerInformation->stopRandomSun();
+
 	_director->getScheduler()->setTimeScale(1.0f);
 
 	_gameEndShieldLayer = GSGameEndLayer::create();

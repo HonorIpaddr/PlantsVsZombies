@@ -18,6 +18,18 @@ UserWinRequirement::~UserWinRequirement()
 {
 }
 
+UserWinRequirement* UserWinRequirement::create(Node* node)
+{
+	UserWinRequirement* userWinRequirement = new (std::nothrow) UserWinRequirement(node);
+	if (userWinRequirement && userWinRequirement->init())
+	{
+		userWinRequirement->autorelease();
+		return userWinRequirement;
+	}
+	CC_SAFE_DELETE(userWinRequirement);
+	return nullptr;
+}
+
 void UserWinRequirement::createShieldLayer()
 {
 	_layer = LayerColor::create(Color4B(0, 0, 0, 180));
