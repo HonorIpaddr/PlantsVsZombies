@@ -182,6 +182,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Based\UserWinRequirement.cpp" />
     <ClCompile Include="..\Classes\Plants\BattlePlants\Jalapeno.cpp" />
     <ClCompile Include="..\Classes\Plants\DefensePlants\Garlic.cpp" />
+    <ClCompile Include="..\Classes\Plants\EmissionPlants\AcidLemon.cpp" />
+    <ClCompile Include="..\Classes\Plants\EmissionPlants\Bullet\AcidLemonBullet.cpp" />
     <ClCompile Include="..\Classes\Plants\EmissionPlants\Bullet\Bullet.cpp" />
     <ClCompile Include="..\Classes\Plants\EmissionPlants\Bullet\Cabbage.cpp" />
     <ClCompile Include="..\Classes\Plants\EmissionPlants\Bullet\FirePea.cpp" />
@@ -244,6 +246,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Based\UserWinRequirement.h" />
     <ClInclude Include="..\Classes\Plants\BattlePlants\Jalapeno.h" />
     <ClInclude Include="..\Classes\Plants\DefensePlants\Garlic.h" />
+    <ClInclude Include="..\Classes\Plants\EmissionPlants\AcidLemon.h" />
+    <ClInclude Include="..\Classes\Plants\EmissionPlants\Bullet\AcidLemonBullet.h" />
     <ClInclude Include="..\Classes\Plants\EmissionPlants\Bullet\Bullet.h" />
     <ClInclude Include="..\Classes\Plants\EmissionPlants\Bullet\Cabbage.h" />
     <ClInclude Include="..\Classes\Plants\EmissionPlants\Bullet\FirePea.h" />

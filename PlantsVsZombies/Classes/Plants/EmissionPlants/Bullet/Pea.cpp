@@ -42,7 +42,7 @@ void Pea::bulletInit()
 	_bulletAnimation->setLocalZOrder(getZOrder(_position.y));
 	_node->addChild(_bulletAnimation);
 	_bulletAnimation->runAction(Sequence::create(MoveBy::create(3.0f, Vec2(2000, 0)),
-		CallFunc::create([=]()
+		CallFunc::create([this]()
 			{
 				_bulletAnimation->setVisible(false);
 			}), nullptr));
@@ -86,23 +86,23 @@ void Pea::bulletAndZombiesCollision()
 
 void Pea::createPeaExplode()
 {
-	static string Skin[] = { {"skin"},{"skin1"},{"skin2"},{"skin3"} };
+	static string Skin[] = { {"skin"},{"skin1"},{"skin2"},{"skin3"} };// !!!没有使用
 	static string Animation[] = { {"Explode"},{"Explode1"},{"Explode2"},{"Explode3"},{"Explode4"} };
 
-	auto PeaExplode = SkeletonAnimation::createWithData(_global->userInformation->getAnimationData().find("PeaExplode")->second);
-	PeaExplode->setPosition(getBulletPosition());
-	PeaExplode->setAnimation(0, Animation[!_isFire ? 4 : 3], false);
-	PeaExplode->setScale(!_isFire ? 1.0f : 1.4f);
-	PeaExplode->setLocalZOrder(_bulletAnimation->getLocalZOrder());
+	auto peaExplode = SkeletonAnimation::createWithData(_global->userInformation->getAnimationData().find("PeaExplode")->second);
+	peaExplode->setPosition(getBulletPosition());
+	peaExplode->setAnimation(0, Animation[!_isFire ? 4 : 3], false);
+	peaExplode->setScale(!_isFire ? 1.0f : 1.4f);
+	peaExplode->setLocalZOrder(_bulletAnimation->getLocalZOrder());
 	if (!_isFire)
 	{
-		PeaExplode->setColor(Color3B(102, 206, 26));
+		peaExplode->setColor(Color3B(102, 206, 26));
 	}
-	_node->addChild(PeaExplode);
+	_node->addChild(peaExplode);
 
-	PeaExplode->runAction(Sequence::create(DelayTime::create(0.8f), CallFunc::create([=]()
+	peaExplode->runAction(Sequence::create(DelayTime::create(0.8f), CallFunc::create([peaExplode]()
 		{
-			PeaExplode->removeFromParent();
+			peaExplode->removeFromParent();
 		}), nullptr));
 }
 

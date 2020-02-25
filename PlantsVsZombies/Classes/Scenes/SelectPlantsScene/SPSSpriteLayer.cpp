@@ -165,7 +165,7 @@ void SPSSpriteLayer::createPlantsCards()
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			if (4 * i + j < 11)
+			if (4 * i + j < 12)
 			{
 				createButtons(Vec2(110 + 185 * j, 490 - 105 * i), 4 * i + j);
 			}
@@ -250,12 +250,12 @@ Text* SPSSpriteLayer::showPlantsInformation(Button* button, const int id) const
 	{
 		{{"SunFlower_2"},{"50"},{"PlantsIcon4"}},{{"PeaShooter"},{"100"},{"PlantsIcon5"}},{{"Wallnut_body"},{"50"},{"PlantsIcon6"}},{{"CherryBomb"},{"150"},{"PlantsIcon7"}},
 		{{"PotatoMine"},{"25"},{"PlantsIcon7"}},{{"Cabbage"},{"100"},{"PlantsIcon3"}},{{"Torchwood"},{"175"},{"PlantsIcon2"}},{{"Spikeweed"},{"100"},{"PlantsIcon12"}},
-		{{"Garlic"},{"50"},{"PlantsIcon10"}},{{"FirePeaShooter"},{"200"},{"PlantsIcon2"}},{{"Jalapeno"},{"150"},{"PlantsIcon2"}}
+		{{"Garlic"},{"50"},{"PlantsIcon10"}},{{"FirePeaShooter"},{"200"},{"PlantsIcon2"}},{{"Jalapeno"},{"150"},{"PlantsIcon2"}},{{"LemonShooter"},{"125"},{"PlantsIcon10"}}
 	};
 	Color3B color[] =
 	{
 		Color3B::YELLOW,Color3B::GREEN,Color3B(140,80,10),Color3B::RED,Color3B(250,75,10),Color3B(64,0,0),Color3B::RED,Color3B::BLACK,Color3B(128,0,128),Color3B::RED,
-		Color3B::RED
+		Color3B::RED,Color3B::ORANGE
 	};
 
 	/* ͼƬ */
@@ -548,12 +548,20 @@ void SPSSpriteLayer::createAnimationAndText(const int& id)
 		this->createPlantsText(1, _global->userInformation->getGameText().find("FIREPEASHOOTER_4")->second, Vec2(360, 870), 30, Color3B::YELLOW, false);
 		break;
 	case 10:
-		_plantCardTextScrollView->setInnerContainerSize(Size(400, 470));
+		_plantCardTextScrollView->setInnerContainerSize(Size(400, 500));
 		this->createPlantsAnimation("Jalapeno", "Jalapeno_Normal", "", Vec2(200, 610), 1.5f);
-		this->createPlantsText(0, _global->userInformation->getGameText().find("FIREPEASHOOTER_1")->second, Vec2(190, 910), 50);
-		this->createPlantsText(2, _global->userInformation->getGameText().find("FIREPEASHOOTER_2")->second, Vec2(360, 1000), 30, Color3B::YELLOW, false);
-		this->createPlantsText(3, _global->userInformation->getGameText().find("FIREPEASHOOTER_3")->second, Vec2(440, 1000), 30, Color3B::RED, false);
-		this->createPlantsText(1, _global->userInformation->getGameText().find("FIREPEASHOOTER_4")->second, Vec2(360, 870), 30, Color3B::YELLOW, false);
+		this->createPlantsText(0, _global->userInformation->getGameText().find("JALAPENO_1")->second, Vec2(190, 910), 50);
+		this->createPlantsText(2, _global->userInformation->getGameText().find("JALAPENO_2")->second, Vec2(360, 1000), 30, Color3B::YELLOW, false);
+		this->createPlantsText(3, _global->userInformation->getGameText().find("JALAPENO_3")->second, Vec2(440, 1000), 30, Color3B::RED, false);
+		this->createPlantsText(1, _global->userInformation->getGameText().find("JALAPENO_4")->second, Vec2(360, 870), 30, Color3B::YELLOW, false);
+		break;
+	case 11:
+		_plantCardTextScrollView->setInnerContainerSize(Size(400, 570));
+		this->createPlantsAnimation("LemonShooter", "LemonNormal", "", Vec2(200, 610), 2.2f);
+		this->createPlantsText(0, _global->userInformation->getGameText().find("ACIDLEMON_1")->second, Vec2(190, 910), 50);
+		this->createPlantsText(2, _global->userInformation->getGameText().find("ACIDLEMON_2")->second, Vec2(360, 1000), 30, Color3B::YELLOW, false);
+		this->createPlantsText(3, _global->userInformation->getGameText().find("ACIDLEMON_3")->second, Vec2(440, 1000), 30, Color3B::RED, false);
+		this->createPlantsText(1, _global->userInformation->getGameText().find("ACIDLEMON_4")->second, Vec2(360, 870), 30, Color3B::YELLOW, false);
 		break;
 	default:
 		break;

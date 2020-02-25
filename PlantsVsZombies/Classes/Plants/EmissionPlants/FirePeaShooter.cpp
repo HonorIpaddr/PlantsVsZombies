@@ -17,7 +17,7 @@ FirePeaShooter::FirePeaShooter(Node* node)
 	_plantImage = nullptr;
 
 	_healthPoint = 300;
-	_combatEffecttiveness = 40;
+	_combatEffecttiveness = 0;
 	_plantsType = PlantsType::FirePeaShooter;
 }
 

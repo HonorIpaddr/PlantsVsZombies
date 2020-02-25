@@ -312,6 +312,11 @@ public:
 	virtual bool* getIsCanDelete();
 
 	/**
+	 *获取僵尸是否有护盾
+	 */
+	virtual bool getZombieIsHaveShield() const;
+
+	/**
 	 *播放僵尸死亡动画
 	 */
 	virtual void playZombiesDieAnimation(const string& animationName);

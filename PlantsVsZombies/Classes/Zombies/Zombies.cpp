@@ -348,6 +348,11 @@ bool* Zombies::getIsCanDelete()
 	return _isCanDelete;
 }
 
+bool Zombies::getZombieIsHaveShield() const
+{
+	return _isHaveShield;
+}
+
 void Zombies::playZombiesDieAnimation(const string& animationName)
 {
 	auto ashes = SkeletonAnimation::createWithData(_global->userInformation->getAnimationData().find(animationName)->second);

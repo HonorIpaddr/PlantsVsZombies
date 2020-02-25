@@ -19,3 +19,4 @@
 #include "Plants/DefensePlants/Garlic.h"
 #include "Plants/EmissionPlants/FirePeaShooter.h"
 #include "Plants/BattlePlants/Jalapeno.h"
+#include "Plants/EmissionPlants/AcidLemon.h"

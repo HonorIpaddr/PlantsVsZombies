@@ -20,14 +20,15 @@ enum class BulletType
 	None = 0,
 	Pea,
 	FirePea,
-	Cabbage
+	Cabbage,
+	AcidLemonBullet
 };
 
 enum class SoundEffectType
 {
 	kernelpult = 0,
 	shieldhit,
-	firepea
+	firepea,
 };
 
 class Bullet
@@ -109,7 +110,7 @@ public:
 	 */
 	template<typename T>
 	bool getBulletIsSameLineWithZombie(T& zombie) {
-		return fabs(_bulletAnimation->getPositionY() - 83 - zombie->getZombiePositionY()) <= 5 ? true : false;
+		return fabs(_bulletAnimation->getPositionY() - 83 - zombie->getZombiePositionY()) <= 10 ? true : false;
 	}
 
 	/**

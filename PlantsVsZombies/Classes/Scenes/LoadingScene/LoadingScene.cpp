@@ -367,11 +367,11 @@ void LoadingScene::calculateFileNumbers()
 {
 #if MYDEBUG
 	/* 文件总数 = 文本数 + 图片数 + 音乐数 + 动画数 */
-	AllFileNumbers =
+	_allFileNumbers =
 		openResourcesPath(_global->userInformation->getTextPath(), "resources/Text/TextPath.reanim.compiled", true) +
 		openResourcesPath(_global->userInformation->getImagePath(), "resources/Text/ImagePath.reanim.compiled", true) +
 		openResourcesPath(_global->userInformation->getMusicPath(), "resources/Text/MusicPath.reanim.compiled", true) +
-		openResourcesPath_global->userInformation->getAnimationPath(), "resources/Text/AnimationPath.reanim.compiled", true);
+		openResourcesPath(_global->userInformation->getAnimationPath(), "resources/Text/AnimationPath.reanim.compiled", true);
 #else
 	_allFileNumbers =
 		openResourcesPath(_global->userInformation->getTextPath(), "resources/Text/TextPath.xml", false) +

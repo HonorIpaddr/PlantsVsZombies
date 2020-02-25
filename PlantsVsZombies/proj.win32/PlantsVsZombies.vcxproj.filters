@@ -242,6 +242,12 @@
     <ClCompile Include="..\Classes\Based\UserInformation.cpp">
       <Filter>Class\Based</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Plants\EmissionPlants\AcidLemon.cpp">
+      <Filter>Class\Plants\EmissionPlants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Plants\EmissionPlants\Bullet\AcidLemonBullet.cpp">
+      <Filter>Class\Plants\EmissionPlants\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Zombies\BucketZombies.h">
@@ -432,6 +438,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Based\UserInformation.h">
       <Filter>Class\Based</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Plants\EmissionPlants\AcidLemon.h">
+      <Filter>Class\Plants\EmissionPlants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Plants\EmissionPlants\Bullet\AcidLemonBullet.h">
+      <Filter>Class\Plants\EmissionPlants\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

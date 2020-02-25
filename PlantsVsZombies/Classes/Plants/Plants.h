@@ -34,7 +34,8 @@ enum class PlantsType
 	Spikeweed,          /* µØ´Ì */
 	Garlic,             /* ´óËâ */
 	FirePeaShooter,     /* »ğÑæÍã¶¹ÉäÊÖ */
-	Jalapeno            /* »ğ±¬À±½· */
+	Jalapeno,           /* »ğ±¬À±½· */
+	AcidLemonShooter    /* Ç¿ËáÄûÃÊÉäÊÖ */
 	//...
 };  
 

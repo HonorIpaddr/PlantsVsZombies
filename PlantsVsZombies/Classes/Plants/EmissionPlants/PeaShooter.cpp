@@ -20,7 +20,7 @@ PeaShooter::PeaShooter(Node* node):
 	_plantImage = nullptr;
 
 	_healthPoint = 300;
-	_combatEffecttiveness = 20;
+	_combatEffecttiveness = 0;
 	_plantsType = PlantsType::PeaShooter;
 }
 

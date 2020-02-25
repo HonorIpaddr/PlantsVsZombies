@@ -82,17 +82,18 @@ Plants* GSAnimationLayer::createDifferentPlants()
 	Plants* plants;
 	switch (buttonLayerInformation->mouseSelectImage->selectPlantsId)
 	{
-	case PlantsType::SunFlower:      plants = new SunFlower(this, _sunLayer);      break;
-	case PlantsType::PeaShooter:     plants = new PeaShooter(this);                break;
-    case PlantsType::WallNut:        plants = new WallNut(this);                   break;
-	case PlantsType::CherryBomb:     plants = new CherryBomb(this);                break;
-	case PlantsType::PotatoMine:     plants = new PotatoMine(this);                break;
-	case PlantsType::CabbagePult:    plants = new CabbagePult(this);               break;
-    case PlantsType::Torchwood:      plants = new Torchwood(this);                 break;
-	case PlantsType::Spikeweed:      plants = new Spikeweed(this);                 break;
-	case PlantsType::Garlic:         plants = new Garlic(this);                    break;
-	case PlantsType::FirePeaShooter: plants = new FirePeaShooter(this);            break;
-	case PlantsType::Jalapeno:       plants = new Jalapeno(this);                  break;
+	case PlantsType::SunFlower:        plants = new SunFlower(this, _sunLayer);    break;
+	case PlantsType::PeaShooter:       plants = new PeaShooter(this);              break;
+    case PlantsType::WallNut:          plants = new WallNut(this);                 break;
+	case PlantsType::CherryBomb:       plants = new CherryBomb(this);              break;
+	case PlantsType::PotatoMine:       plants = new PotatoMine(this);              break;
+	case PlantsType::CabbagePult:      plants = new CabbagePult(this);             break;
+    case PlantsType::Torchwood:        plants = new Torchwood(this);               break;
+	case PlantsType::Spikeweed:        plants = new Spikeweed(this);               break;
+	case PlantsType::Garlic:           plants = new Garlic(this);                  break;
+	case PlantsType::FirePeaShooter:   plants = new FirePeaShooter(this);          break;
+	case PlantsType::Jalapeno:         plants = new Jalapeno(this);                break;
+	case PlantsType::AcidLemonShooter: plants = new AcidLemonShooter(this);        break;
 	default: break;
 	}
 	return plants;

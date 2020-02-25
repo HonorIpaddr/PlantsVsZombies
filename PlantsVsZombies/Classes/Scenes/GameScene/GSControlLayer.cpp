@@ -250,17 +250,18 @@ void GSControlLayer::createPreviewPlants()
 	Plants* previewPlants, * curPlants;/* ‘§¿¿÷≤ŒÔ */
 	switch (_selectPlantsTag)
 	{
-	case PlantsType::SunFlower:        previewPlants = SunFlower::create(this);       curPlants = SunFlower::create(this);       break;
-	case PlantsType::PeaShooter:       previewPlants = PeaShooter::create(this);      curPlants = PeaShooter::create(this);      break;
-	case PlantsType::WallNut:          previewPlants = WallNut::create(this);         curPlants = WallNut::create(this);         break;
-	case PlantsType::CherryBomb:       previewPlants = CherryBomb::create(this);      curPlants = CherryBomb::create(this);      break;
-	case PlantsType::PotatoMine:       previewPlants = PotatoMine::create(this);      curPlants = PotatoMine::create(this);      break;
-	case PlantsType::CabbagePult:      previewPlants = CabbagePult::create(this);     curPlants = CabbagePult::create(this);     break;
-	case PlantsType::Torchwood:        previewPlants = Torchwood::create(this);       curPlants = Torchwood::create(this);       break;
-	case PlantsType::Spikeweed:        previewPlants = Spikeweed::create(this);       curPlants = Spikeweed::create(this);       break;
-	case PlantsType::Garlic:           previewPlants = Garlic::create(this);          curPlants = Garlic::create(this);          break;
-	case PlantsType::FirePeaShooter:   previewPlants = FirePeaShooter::create(this);  curPlants = FirePeaShooter::create(this);  break;
-	case PlantsType::Jalapeno:         previewPlants = Jalapeno::create(this);        curPlants = Jalapeno::create(this);        break;
+	case PlantsType::SunFlower:          previewPlants = SunFlower::create(this);         curPlants = SunFlower::create(this);         break;
+	case PlantsType::PeaShooter:         previewPlants = PeaShooter::create(this);        curPlants = PeaShooter::create(this);        break;
+	case PlantsType::WallNut:            previewPlants = WallNut::create(this);           curPlants = WallNut::create(this);           break;
+	case PlantsType::CherryBomb:         previewPlants = CherryBomb::create(this);        curPlants = CherryBomb::create(this);        break;
+	case PlantsType::PotatoMine:         previewPlants = PotatoMine::create(this);        curPlants = PotatoMine::create(this);        break;
+	case PlantsType::CabbagePult:        previewPlants = CabbagePult::create(this);       curPlants = CabbagePult::create(this);       break;
+	case PlantsType::Torchwood:          previewPlants = Torchwood::create(this);         curPlants = Torchwood::create(this);         break;
+	case PlantsType::Spikeweed:          previewPlants = Spikeweed::create(this);         curPlants = Spikeweed::create(this);         break;
+	case PlantsType::Garlic:             previewPlants = Garlic::create(this);            curPlants = Garlic::create(this);            break;
+	case PlantsType::FirePeaShooter:     previewPlants = FirePeaShooter::create(this);    curPlants = FirePeaShooter::create(this);    break;
+	case PlantsType::Jalapeno:           previewPlants = Jalapeno::create(this);          curPlants = Jalapeno::create(this);          break;
+	case PlantsType::AcidLemonShooter:   previewPlants = AcidLemonShooter::create(this);  curPlants = AcidLemonShooter::create(this);  break;
 	default: break;
 	}
 	
