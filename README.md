@@ -2,8 +2,6 @@
 * **Use Cocos2dx V3.16 Create Game Project**<br>
 * *!!! important*   **This game mimics the original plant vs. Zombies. Not for commercial use**<br>
 
-***注意！！！该项目不能直接运行，因为缺少游戏所需要的资源文件。（由于资源文件可能存在侵权问题，所以被移除）***
-
 
 ## Project Description（项目说明）<br>
         This game is all made by myself. This version is beta (with some playability) and will be updated from time
@@ -35,8 +33,9 @@
 * Download this project and compile it in visual studio
 
 * 安装visual studio 2017 or visual studio 2019
-* 下载此项目并在visual studio中编译运行
-* **注意！！！该项目不能直接运行，因为缺少游戏所需要的资源文件。（由于资源文件可能存在侵权问题，所以取消了资源文件）**
+* 下载此项目并在visual studio中编译运行<br>
+
+***注意！！！该项目不能直接运行，因为缺少游戏所需要的资源文件。（由于资源文件可能存在侵权问题，所以被移除）***
 
 ## Last（最后）
 **Author: LZ** <br>
